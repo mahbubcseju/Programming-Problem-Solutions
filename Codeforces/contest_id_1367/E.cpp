@@ -103,18 +103,57 @@ typedef pair<int,int >P;
 ////////////////////////
 #define F(i,a,b) for(int i=a;i<b; i++)
 #define LL long long
-#define MX  10000001
+#define MX  200007
 #define md 998244353ll
 ///////////////////////////
 ///////////////////////////
 ///
 
-
 int main(){
+
+  int tc;
+  I(tc);
+  while(tc--)
+  {
     int n, m;
     I2(n, m);
-    for(int  i = 1; i <= n; i++){
-        cout<<" "<<endl;
-    }
-  return 0;
+
+    char ar[n+2];
+    SC("%s", ar + 1);
+    int l = strlen(ar + 1);
+      int mp[28+2];
+      SET(mp);
+      for(int i = 1; i <= l;i++ )mp[ar[i] - 'a'] ++;
+
+      vector<int>v;
+      int x = m;
+      v.PB(1);
+
+      for(int i = 1;i * i <= x;i++){
+        if(x % i == 0){
+          v.PB(i);
+          v.PB(x/i);
+        }
+      }
+      if( x > 1)v.PB(x);
+      int ans = 0;
+      for(int k1 = 0;k1<v.size(); k1++){
+        int k = v[k1];
+        for(int i = n; i >= 1;i--){
+          int ko = 0;
+
+          for(int j = 0; j< 26; j++){
+            ko += mp[j] / i;
+          }
+        // cout<<i<<" "<<ko<<endl;
+          if(ko >= k){
+            ans = max(ans, i * k);
+            break;
+          }
+        }
+      }
+      PI(ans), NL;
+    
+  }
+    return 0;
 }

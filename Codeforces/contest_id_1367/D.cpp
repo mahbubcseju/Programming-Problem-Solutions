@@ -103,18 +103,76 @@ typedef pair<int,int >P;
 ////////////////////////
 #define F(i,a,b) for(int i=a;i<b; i++)
 #define LL long long
-#define MX  10000001
+#define MX  200007
 #define md 998244353ll
 ///////////////////////////
 ///////////////////////////
 ///
 
-
 int main(){
-    int n, m;
-    I2(n, m);
-    for(int  i = 1; i <= n; i++){
-        cout<<" "<<endl;
+
+  int tc;
+  I(tc);
+  while(tc--)
+  {
+    char ar[100];
+    SC("%s", ar + 1);
+
+    int n;
+    I(n);
+    int a[n+2];
+    for(int i = 1;i<=n;i++){
+      I(a[i]);
     }
-  return 0;
+    int mp[28];
+    SET(mp);
+    int l = strlen(ar+1);
+    for(int i = 1;i<=l;i++){
+      mp[ar[i] - 'a']++;
+    }
+    char ans[n+2];
+    vector<int>v;
+    for(int i = 1;i<= l;i++){
+      int cnt = 0;
+      v.clear();
+      for(int  j = 1;j<=n;j++){
+        if(a[j] == 0){
+          cnt++;
+          v.push_back(j);
+        }
+      }
+      if(!cnt)break;
+      int ki = -1;
+      for(int j = 25; j>=0;j--){
+        if(mp[j] >=cnt){
+          ki= j;
+          mp[j] = 0;
+          break;
+        }
+        mp[j] = 0;
+      }
+
+      //cout<<ki<<endl;
+      for(int  j = 1;j<=n;j++){
+        if(a[j] == 0){
+          ans[j] = (char)('a' + ki);
+        }
+      }
+      
+      for(int j = 0;j<v.size(); j++){
+          for(int k = 1;k<=n;k++){
+            if(a[k] > 0) a[k] -= abs(k-v[j]);
+          }
+        
+      }
+      for(int  j = 0;j<v.size();j++){
+        a[v[j]] = -1;
+      }
+    }
+
+    for(int i = 1;i<=n;i++)PC("%c", ans[i]);
+    NL;
+
+  }
+    return 0;
 }

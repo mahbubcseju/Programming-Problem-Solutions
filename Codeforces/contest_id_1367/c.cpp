@@ -103,18 +103,43 @@ typedef pair<int,int >P;
 ////////////////////////
 #define F(i,a,b) for(int i=a;i<b; i++)
 #define LL long long
-#define MX  10000001
+#define MX  200007
 #define md 998244353ll
 ///////////////////////////
 ///////////////////////////
 ///
 
-
 int main(){
+
+  int tc;
+  I(tc);
+  while(tc--)
+  {
     int n, m;
     I2(n, m);
-    for(int  i = 1; i <= n; i++){
-        cout<<" "<<endl;
+    char ar[n+2];
+    SC("%s", ar + 1);
+     int res = 0;
+    int cn = m;
+    for(int i = 1;i<= n; i++){
+
+      if(ar[i] == '0'){
+        cn++;
+      }
+      else {
+        int k = cn - m;
+        if(k>0){
+          res += k/ (m+1);
+        }
+        cn = 0;
+      }
     }
-  return 0;
+
+    if(cn>0){
+      res += cn/ (m+1);
+    }
+    PI(res), NL;
+
+  }
+    return 0;
 }
