@@ -110,14 +110,36 @@ typedef pair<int,int >P;
 ///
 
 int main(){
-
-    string s;
-    cin>>s;
-    for(int i = 0;i<s.size();i++){
-      if(s[i] == '9')s[i] = '1';
-      else if(s[i] == '1')s[i] = '9';
+    int n;
+    I(n);
+    int ar[n+2];
+    int dp[21][2];
+    int DP[21];
+    SET(DP);
+    SET(dp);
+    for(int i= 1; i<=n;i++){
+        I(ar[i]);
     }
-    cout<<s<<endl;
-    
+
+    ll res =0;
+    for(int i= 1; i<=n;i++){
+        for(int j=0;j<20;j++){
+            if( ( ar[i]&(1<<j))){
+                DP[j]^=1;
+                // cout<<j<<" lol"<<DP[j]<<endl;
+                dp[j][DP[j]] = i;
+            }
+        }
+        int k =0;
+        for(int j=0;j<20;j++){
+            k = max(k, dp[j][DP[j]^1]);
+        }
+        // cout<<k<<" "<<i<<endl;
+        res += ( i-k);
+    }
+    PL(res);
+
+
+
     return 0;
 }

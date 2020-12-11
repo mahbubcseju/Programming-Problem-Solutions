@@ -109,15 +109,49 @@ typedef pair<int,int >P;
 ///////////////////////////
 ///
 
-int main(){
+char ar[MX+2];
 
-    string s;
-    cin>>s;
-    for(int i = 0;i<s.size();i++){
-      if(s[i] == '9')s[i] = '1';
-      else if(s[i] == '1')s[i] = '9';
+int main(){
+    SC("%s", ar + 1);
+    int a[12];
+    SET(a);
+    int l = strlen(ar + 1);
+    ll x= 0;
+    for(int i = 1;i<=l;i++){
+        a[ar[i]-'0']++;
     }
-    cout<<s<<endl;
+    if(l < 4 ){
+        sort(ar+1, ar+ l+1);
+        bool fl =0;
+        do {
+                ll x = 0;
+                for(int i=1;i<=l;i++){
+                    x = x * 10 + ar[i]-'0';
+                }
+                if(x%8==0){cout<<"Yes"<<endl;
+                return 0;
+            }
+        }while(next_permutation(ar+ 1, ar + l+ 1));
+        cout<<"No"<<endl;
+        return 0;
+    }
+    for(int i=0; i<1000;i+=8){
+        int x = i;
+        int bl[12];
+        SET(bl);
+        bool fl =0;
+        for(int j=1;j<=3;j++){
+            int k = x% 10;
+            bl[k]++;
+            if(bl[k]> a[k])fl = 1;
+            x/=10;
+        }
+        if(!fl){
+            cout<<"Yes"<<endl;
+            return 0;
+        }
+    }
+    cout<<"No"<<endl;
     
     return 0;
 }

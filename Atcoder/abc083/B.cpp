@@ -108,16 +108,23 @@ typedef pair<int,int >P;
 ///////////////////////////
 ///////////////////////////
 ///
-
 int main(){
-
-    string s;
-    cin>>s;
-    for(int i = 0;i<s.size();i++){
-      if(s[i] == '9')s[i] = '1';
-      else if(s[i] == '1')s[i] = '9';
-    }
-    cout<<s<<endl;
     
+   int n, a, b;
+   cin>>n>>a>>b;
+   int res =0;
+   for(int i=1;i<=n;i++){
+       int x=0;
+       int y= i;
+       while(y){
+           x += y %10;
+           y/=10;
+       }
+       if(x>=a && x<=b){res+=i;
+       }
+
+   }
+   cout<<res<<Endl;
+
     return 0;
 }

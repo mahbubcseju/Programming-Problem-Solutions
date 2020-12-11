@@ -108,16 +108,12 @@ typedef pair<int,int >P;
 ///////////////////////////
 ///////////////////////////
 ///
-
 int main(){
-
-    string s;
-    cin>>s;
-    for(int i = 0;i<s.size();i++){
-      if(s[i] == '9')s[i] = '1';
-      else if(s[i] == '1')s[i] = '9';
-    }
-    cout<<s<<endl;
     
+   int a, b, c, d;
+   cin>>a>>b>>c>>d;
+   if(a + b == c+ d)cout<<"Balanced"<<endl;
+   else if ( a + b > c + d)cout<<"Left"<<endl;
+   else cout<<"Right"<<endl;
     return 0;
 }

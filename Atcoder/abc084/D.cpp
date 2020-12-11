@@ -109,15 +109,31 @@ typedef pair<int,int >P;
 ///////////////////////////
 ///
 
-int main(){
-
-    string s;
-    cin>>s;
-    for(int i = 0;i<s.size();i++){
-      if(s[i] == '9')s[i] = '1';
-      else if(s[i] == '1')s[i] = '9';
+bool pr[MX+2];
+int ar[MX+2];
+void seive(){
+    for(int i=2;i<=MX; i++){
+        if(pr[i]==0) {
+            for(int j=i *2; j<=MX; j+= i){
+                pr[j] = 1;
+            }
+        }
     }
-    cout<<s<<endl;
+}
+int main(){
+    seive();
+    pr[0] =pr[1] =1 ;
+    for(int i=3;i<=MX;i++){
+        ar[i] = ar[i-1];
+        if(pr[i] == 0 && pr[(i+1)/2] == 0)ar[i]++;
+    }
+    int q;
+    I(q);
+    while(q--){
+        int l, r;
+        I2(l, r);
+        PI(ar[r] - ar[l-1]), NL;
+    }
     
     return 0;
 }

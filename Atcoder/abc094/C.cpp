@@ -111,22 +111,13 @@ typedef pair<int,int >P;
 
 int main(){
 
-   int n;
-   I(n);
-   int ar[n+2];
-   int br[n+2];
-   for(int i=1;i<=n;i++){
-       I(ar[i]);
-       br[i] = ar[i];
-
-   }
-   sort(br + 1, br+n+1);
-   int x1 = (n )/2;
-
-   for(int i=1;i<=n;i++){
-       int x= lower_bound(br+1, br + n + 1, ar[i])-br;
-       if( x<=x1)cout<<br[x1 + 1]<<endl;
-       else cout<<br[x1]<<endl;
-   }
+    string s;
+    cin>>s;
+    for(int i = 0;i<s.size();i++){
+      if(s[i] == '9')s[i] = '1';
+      else if(s[i] == '1')s[i] = '9';
+    }
+    cout<<s<<endl;
+    
     return 0;
 }

@@ -109,11 +109,34 @@ typedef pair<int,int >P;
 ///////////////////////////
 ///
 
-int main() {
-    int x ,y,z;
-    cin>>x>>y>>z;
-    if(x + y >=z && x <= z)cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
+int main(){
 
+    int n, k;
+    cin>>n>>k;
+    ll dp[ 2 * n + 2];
+    dp[0] = 0;
+    dp[1] = 0;
+    for(int i=2 ;i<= 2 *n;i++){
+        if (i <= n){
+             dp[i] = i-1;
+        }
+        else {
+            int x = i- n;
+            int y = n;
+            int koto = (y- x +1);
+            dp[i] = koto;
+        }
+    }
+    ll res =0;
+    for(int i=1;i<=2 *n; i++){
+        if( i - k >= 1 && i - k <= 2 * n){
+            res = (res + dp[i] * dp[i - k]);
+            // cout<<i<<" "<<(i- k)<<" "<<dp[i]<<" i "<<dp[i - k]<<endl;
+            // cout<<i<<" "<<res<<endl;
+        }
+    }
+    cout<<res<<endl;
+
+    
     return 0;
 }

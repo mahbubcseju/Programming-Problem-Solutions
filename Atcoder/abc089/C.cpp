@@ -109,15 +109,41 @@ typedef pair<int,int >P;
 ///////////////////////////
 ///
 
-int main(){
-
-    string s;
-    cin>>s;
-    for(int i = 0;i<s.size();i++){
-      if(s[i] == '9')s[i] = '1';
-      else if(s[i] == '1')s[i] = '9';
+pair<int, int> ar[MX];
+int a[302][302];
+int h, w, d;
+int DP[302 * 302];
+int dp(int x1) {
+    if(x1 + d > h * w){
+        return 0;
     }
-    cout<<s<<endl;
-    
+    int &ret = DP[x1];
+    if (ret != -1)return ret;
+    pair<int, int> x = ar[x1];
+    pair<int, int> y = ar[x1 + d];
+    ret = abs(x.first - y.first) + abs(x.second- y.second) +  dp( x1 + d);
+    return ret ;
+
+}
+int main() {
+
+    I3(h, w, d);
+    for(int i=1;i<=h;i++){
+        for(int j=1;j<=w;j++){
+            int x;
+            I(x);
+            ar[x] = mk(i, j);
+        }
+    }
+    SETR(DP);
+    int q;
+    I(q);
+    while(q--){
+        int x, y;
+        I2(x, y);
+        int res = dp(x) - dp(y);
+        PI(res), NL;
+    }
+
     return 0;
 }

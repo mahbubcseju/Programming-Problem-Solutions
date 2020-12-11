@@ -109,15 +109,24 @@ typedef pair<int,int >P;
 ///////////////////////////
 ///
 
+  ll dp[3000+2][ 3000 * 2 + 2];
 int main(){
 
-    string s;
-    cin>>s;
-    for(int i = 0;i<s.size();i++){
-      if(s[i] == '9')s[i] = '1';
-      else if(s[i] == '1')s[i] = '9';
-    }
-    cout<<s<<endl;
-    
+  ll n, k;
+  L2(n, k);
+
+
+  dp[0][0] = 0;
+  for(int i=1; i<=n; i++){
+      for(int j= 2 *n; j >= 1; j--){
+          if(j > i)dp[i][j] = 0;
+          else if(i == j)dp[i][j] = 1;
+          else {
+            //   cout<<dp[i-1][j-1]<<dp[i][ 2 * j]<<endl;
+              dp[i][j] = (dp[i-1][j-1] + dp[i][ 2 * j ])% md;
+          }
+      }
+  }
+    cout<<dp[n][k]<<endl;
     return 0;
 }

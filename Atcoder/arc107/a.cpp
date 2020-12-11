@@ -108,16 +108,13 @@ typedef pair<int,int >P;
 ///////////////////////////
 ///////////////////////////
 ///
-
+ll cal(ll x){
+    ll ans = (x * ( x + 1)) / 2;
+    return ans % md;
+}
 int main(){
-
-    string s;
-    cin>>s;
-    for(int i = 0;i<s.size();i++){
-      if(s[i] == '9')s[i] = '1';
-      else if(s[i] == '1')s[i] = '9';
-    }
-    cout<<s<<endl;
-    
+    ll n, m, k;
+    cin>>n>>m>>k;
+    cout<<((cal(n) * cal(m))% md * cal(k))% md <<endl;
     return 0;
 }

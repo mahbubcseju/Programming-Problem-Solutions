@@ -108,16 +108,31 @@ typedef pair<int,int >P;
 ///////////////////////////
 ///////////////////////////
 ///
-
 int main(){
-
-    string s;
-    cin>>s;
-    for(int i = 0;i<s.size();i++){
-      if(s[i] == '9')s[i] = '1';
-      else if(s[i] == '1')s[i] = '9';
-    }
-    cout<<s<<endl;
     
+   string s;
+   cin>>s;
+   vector<pair<int,int>> ar;
+   int c =1;
+   int l = s.size();
+   for(int i=1;i<s.size();i++){
+       if(s[i] != s[i-1]){
+           ar.PB(mk(c, s[i-1]));
+           c =1;
+       }
+       else c++;
+   }
+   ar.PB(mk(c, c));
+   int l1 = ar.size();
+   int res =0;
+   for(int j = 0; j<l1; j++){
+       res = max(res, ar[j].first);
+       if(j > 0 && j < l1-1){
+           res = max(res, ar[j].first + min(ar[j-1].first , ar[j+1].first));
+       }
+
+   }
+   cout<<res<<endl;
+
     return 0;
 }

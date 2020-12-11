@@ -108,16 +108,28 @@ typedef pair<int,int >P;
 ///////////////////////////
 ///////////////////////////
 ///
-
 int main(){
-
-    string s;
-    cin>>s;
-    for(int i = 0;i<s.size();i++){
-      if(s[i] == '9')s[i] = '1';
-      else if(s[i] == '1')s[i] = '9';
+    int n;
+    I(n);
+    int ar[n+2], br[n+2], cr[n+2];
+    for(int i=1;i<n;i++){
+        I3(ar[i], br[i], cr[i]);
     }
-    cout<<s<<endl;
-    
+    ll ans[n+2];
+    for(int i=1;i<=n;i++){
+        ll cur = 0;
+        
+        for(int j=i;j<n;j++){
+            if(cur <= br[j]){
+                cur = br[j] + ar[j];
+            }else {
+                ll x = (cur - br[j]);
+                ll y = (x + cr[j] - 1) / cr[j];
+                ll st = br[j] + y * cr[j] + ar[j];
+                cur = st;
+            }
+        }
+        PL(cur), NL;
+    }
     return 0;
 }
