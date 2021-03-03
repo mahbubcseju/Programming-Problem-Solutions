@@ -109,27 +109,9 @@ typedef pair<int,int >P;
 ///////////////////////////
 ///
 int main() {
-    int n;
-    I(n);
-    string a[n+2];
-    map<string,int>mp, mp1;
-    for(int i=1;i<=n;i++){
-        cin>>a[i];
-        mp[a[i]]++;
-    }
-    int m;
-    I(m);
-    string b[m+2];
-    for(int i=1;i<=m;i++){
-        cin>>b[i];
-        mp1[b[i]]++;
-    }
-
-    int res =0;
-
-    for(int i=1;i<=n;i++){
-        res = max(res, mp1[a[i]] - mp[a[i]]);
-    }
-    cout<<res<<endl;
+    int a, b, c;
+    cin>>a>>b>>c;
+    if(a + b >=c)cout<<"Yes"<<endl;
+    else cout<<"No"<<endl;
     return 0;
 }

@@ -108,15 +108,56 @@ typedef pair<int,int >P;
 ///////////////////////////
 ///////////////////////////
 ///
-int main(){
-    int n;
-    I(n);
-    for(int i=0;i<=n;i++){
-        if(( n - i * 4) >= 0 && ( n- i* 4)% 7 == 0){
-            cout<<"Yes"<<endl;
-            return 0;
+vector<int>a[202];
+int vis[202];
+int li[202];
+bool dfs(int u)
+{
+    vis[u]=1;
+    for(int i=0; i<a[u].size(); i++)
+    {
+        int v=a[u][i];
+        if (vis[li[v]])continue;
+        if(li[v]==-1||dfs(li[v]))
+        {
+            li[v]=u;
+            return true;
         }
     }
-    cout<<"No"<<endl;
+    return false;
+}
+int main() {
+    int n;
+    I(n);
+    pair<int,int>ar[n+2], br[n+2];
+    for(int i=1;i<=n;i++){
+        I2(ar[i].x, ar[i].y);
+    }
+    for(int i=1;i<=n;i++){
+        I2(br[i].x, br[i].y);
+    }
+    int res =0;
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=n;j++){
+            if(ar[i].x < br[j].x && ar[i].y < br[j].y){
+                a[i].PB(n + j);
+            }
+        }
+    }
+    int ans=0;
+    SETR(li);
+    for(int i=1; i<=n; i++)
+    {
+        if(a[i].size()!=0)
+        {
+
+            SET(vis);
+            if(dfs(i)){
+                ans++;
+                //cout<<i<<endl;
+            }
+        }
+    }
+    PI(ans);
     return 0;
 }

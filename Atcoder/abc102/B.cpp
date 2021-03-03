@@ -111,12 +111,9 @@ typedef pair<int,int >P;
 int main(){
     int n;
     I(n);
-    for(int i=0;i<=n;i++){
-        if(( n - i * 4) >= 0 && ( n- i* 4)% 7 == 0){
-            cout<<"Yes"<<endl;
-            return 0;
-        }
-    }
-    cout<<"No"<<endl;
+    int ar[n+2];
+    for(int i=1;i<=n;i++)I(ar[i]);
+    sort(ar +1, ar + n + 1);
+    cout<<(ar[n] - ar[1])<<endl;
     return 0;
 }

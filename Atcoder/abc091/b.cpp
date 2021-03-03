@@ -108,15 +108,28 @@ typedef pair<int,int >P;
 ///////////////////////////
 ///////////////////////////
 ///
-int main(){
+int main() {
     int n;
     I(n);
-    for(int i=0;i<=n;i++){
-        if(( n - i * 4) >= 0 && ( n- i* 4)% 7 == 0){
-            cout<<"Yes"<<endl;
-            return 0;
-        }
+    string a[n+2];
+    map<string,int>mp, mp1;
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
+        mp[a[i]]++;
     }
-    cout<<"No"<<endl;
+    int m;
+    I(m);
+    string b[m+2];
+    for(int i=1;i<=m;i++){
+        cin>>b[i];
+        mp1[b[i]]++;
+    }
+
+    int res =0;
+
+    for(int i=1;i<=n;i++){
+        res = max(res, mp[a[i]] - mp1[a[i]]);
+    }
+    cout<<res<<endl;
     return 0;
 }

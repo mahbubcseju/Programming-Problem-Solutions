@@ -111,12 +111,27 @@ typedef pair<int,int >P;
 int main(){
     int n;
     I(n);
-    for(int i=0;i<=n;i++){
-        if(( n - i * 4) >= 0 && ( n- i* 4)% 7 == 0){
-            cout<<"Yes"<<endl;
-            return 0;
+    ll ar[n+2];
+    ll ma = 0;
+    for(int i=1;i<=n;i++){
+        L(ar[i]);
+        ma = max(ma, ar[i]);
+    }
+
+    ll lo = ma, hi = 10000000000000000;
+
+    while(lo <= hi) {
+        ll mid = (lo + hi) /2;
+        ll cum = 0;
+        vector<ll> sum;
+        for(int i=1;i<=n;i++){
+            if(cum + ar[i] > mid){
+                sum.PB(cum);
+                cum = 0;
+            }
+            cum +=  ar[i];
+            if(sum.size() > 3)break;
         }
     }
-    cout<<"No"<<endl;
     return 0;
 }

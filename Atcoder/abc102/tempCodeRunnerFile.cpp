@@ -111,12 +111,44 @@ typedef pair<int,int >P;
 int main(){
     int n;
     I(n);
-    for(int i=0;i<=n;i++){
-        if(( n - i * 4) >= 0 && ( n- i* 4)% 7 == 0){
-            cout<<"Yes"<<endl;
-            return 0;
+    ll ar[n+2];
+    ll ma = 0;
+    for(int i=1;i<=n;i++){
+        L(ar[i]);
+        ma = max(ma, ar[i]);
+    }
+
+    ll lo = -ma, hi = ma;
+
+    for(int s = 1; s <= 100; s++){
+        ll diff = (hi - lo)/3;
+        ll  mid1 = lo + diff;
+        ll mid2  = hi - diff;
+        ll res1 = 0, res2 =0;
+
+        for(int i=1;i<=n;i++){
+            res1 += abs(ar[i] - (mid1 + i));
+            res2 += abs(ar[i] - (mid2 + i));
+            
+        }
+
+        if(res1 > res2) {
+            lo = mid1 + 1;
+        }else {
+            hi = mid2 - 1;
         }
     }
-    cout<<"No"<<endl;
+
+    ll ans =0;
+    for(ll j= (lo - 100); j<= (hi + 100);j++){
+        ll res1 = 0;
+        for(int i=1;i<=n;i++){
+            res1 += abs(ar[i] - (j + i));
+
+        }
+        ans = min(ans, res1);
+    }
+
+    cout<<ans<<endl;
     return 0;
 }
