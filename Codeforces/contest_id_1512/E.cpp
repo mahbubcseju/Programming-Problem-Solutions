@@ -103,66 +103,76 @@ typedef pair<int,int >P;
 ////////////////////////
 #define F(i,a,b) for(int i=a;i<b; i++)
 #define LL long long
-#define MX  200007
+#define MX  10000007
 #define md 998244353ll
 ///////////////////////////
 ///////////////////////////
 ///
-int main(){
+void solve(){
+    int n, l, r, s;
+    I(n); I2(l, r); I(s);
+    int m = (r - l + 1);
+    int sum = (m * (m + 1))/2;
+    
+    if(s < sum){
+        printf("-1\n");
+        return;
+    }
 
-    int tc;
-    I(tc);
-    while(tc--){
-        int n;
-        I(n);
-        n += 2;
-        ll ar[n+2];
-        ll sum[2][n+2];
-        ll ma[2][n+2];
-        SET(ma);
-        SET(sum);
-        for(int i=1;i<=n;i++){
-            L(ar[i]);
-        }
-        for(int i=1;i<=n;i++){
-            ma[0][i] = max(ma[0][i-1], ar[i]);
-            sum[0][i] = sum[0][i - 1] + ar[i];
-        }
-        for(int i=n;i>=1;i--){
-            ma[1][i] = max(ma[1][i + 1], ar[i]);
-            sum[1][i] = sum[1][i  + 1] + ar[i];
-        }
+    vector<int>ar;
+    for(int i = 1; i <= m; i++){
+        ar.PB(i);
+    }
+    int ptr = m - 1, ptr1 = n;
 
-        vector<int>ans;
-
-        for(int i=1;i<=n;i++){
-            ll max_c = max(ma[0][i-1], ma[1][i+1]);
-            ll sum_c = sum[0][i-1] + sum[1][i+1];
-            if(sum_c == 2 * max_c){
-                bool fl = 0;
-                for(int j=1;j<=n;j++){
-                    if(i == j)continue;
-                    if(ar[j] == max_c ){
-                        if(fl){
-                            ans.PB(ar[j]);
-                        }
-                        fl =1;
-                    }else ans.PB(ar[j]);
-                }
-                break;
-            }
-        }
-
-        if(ans.size() == 0)cout<<(-1)<<endl;
-        else {
-            bool fl =0;
-            for(auto i: ans){
-                if(fl)PC(" ");
-                fl =1;
-                PC("%d", i);
-            }
-            NL;
+    while(sum < s && ptr >= 0 && ptr < ptr1){
+        int koto = ptr1- ar[ptr];
+        if(sum + koto <= s){
+            ar[ptr] = ptr1;
+            sum += koto;
+            ptr --, ptr1 --;
+        }else ptr1 --;
+    }
+    if(sum != s){
+        printf("-1\n");
+        return; 
+    }
+    int mp[n+2];
+    SET(mp);
+    for(auto i: ar){
+        mp[i] ++;
+    }
+    vector<int>ans;
+    int cnt = 1;
+    for(int i=1;i<=n && cnt < l;i++){
+        if(mp[i]==0){
+            cnt++;
+            ans.PB(i);
         }
     }
+    for(int i=1;i<=n;i++){
+        if(mp[i]){
+            ans.PB(i);
+        }
+    }
+    cnt = 1;
+    for(int i=1;i<=n;i++){
+        if(mp[i]==0){
+            cnt++;
+            if(cnt>l)
+            ans.PB(i);
+        }
+    }
+    for(auto i: ans){
+        cout<<i<<" ";
+    }
+    NL;
+
+
+}
+int main() {
+    int tc;
+    I(tc);
+    while(tc--)solve();
     return 0;
 }
