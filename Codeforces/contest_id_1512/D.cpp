@@ -138,11 +138,7 @@ int main(){
         for(int i=1;i<=n;i++){
             ll max_c = max(ma[0][i-1], ma[1][i+1]);
             ll sum_c = sum[0][i-1] + sum[1][i+1];
-
-    
             if(sum_c == 2 * max_c){
-          
-          
                 bool fl = 0;
                 for(int j=1;j<=n;j++){
                     if(i == j)continue;

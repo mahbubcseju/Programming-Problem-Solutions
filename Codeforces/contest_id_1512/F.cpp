@@ -103,7 +103,7 @@ typedef pair<int,int >P;
 ////////////////////////
 #define F(i,a,b) for(int i=a;i<b; i++)
 #define LL long long
-#define MX  1000007
+#define MX  10000007
 #define md 998244353ll
 ///////////////////////////
 ///////////////////////////
@@ -129,11 +129,11 @@ void seive(){
         }
     }
 }
-int ans[MX + 2];
 
+int ans[MX + 2];
 int main() {
     seive();
-    for(int i=1;i<=100;i++){
+    for(int i=1;i<=MX;i++){
         if(ans[sum[i]] == 0){
             ans[sum[i]] = i;
         }
